@@ -28,8 +28,5 @@ abstract class AndroidVersionDatabase : RoomDatabase() {
                 AndroidVersionDatabase::class.java,
                 "androidversions.db"
             ).build()
-
     }
-
 }
-

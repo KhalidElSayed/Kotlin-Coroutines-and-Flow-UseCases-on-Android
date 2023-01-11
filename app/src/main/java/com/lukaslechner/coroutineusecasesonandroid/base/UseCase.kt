@@ -16,6 +16,7 @@ import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase2.
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase2.rx.SequentialNetworkRequestsRxActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase3.PerformNetworkRequestsConcurrentlyActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase4.VariableAmountOfNetworkRequestsActivity
+import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase4.rx.VariableAmountOfNetworkRequestsRxActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase5.NetworkRequestWithTimeoutActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase6.RetryNetworkRequestActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase7.TimeoutAndRetryActivity
@@ -44,6 +45,7 @@ const val useCase2UsingCallbacksDescription = "#2 using Callbacks"
 const val useCase2UsingRxDescription = "#2 using RxJava"
 const val useCase3Description = "#3 Perform several network requests concurrently"
 const val useCase4Description = "#4 Perform variable amount of network requests"
+const val useCase4UsingRxDescription = "#4 using RxJava"
 const val useCase5Description = "#5 Network request with TimeOut"
 const val useCase6Description = "#6 Retry Network request"
 const val useCase7Description = "#7 Network requests with timeout and retry"
@@ -87,6 +89,10 @@ private val coroutinesUseCases =
             UseCase(
                 useCase4Description,
                 VariableAmountOfNetworkRequestsActivity::class.java
+            ),
+            UseCase(
+                useCase4UsingRxDescription,
+                VariableAmountOfNetworkRequestsRxActivity::class.java
             ),
             UseCase(
                 useCase5Description,

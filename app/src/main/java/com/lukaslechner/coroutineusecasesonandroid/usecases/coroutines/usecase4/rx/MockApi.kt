@@ -1,10 +1,7 @@
-package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase2.rx
+package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase4.rx
 
 import com.google.gson.Gson
-import com.lukaslechner.coroutineusecasesonandroid.mock.AndroidVersion
-import com.lukaslechner.coroutineusecasesonandroid.mock.VersionFeatures
-import com.lukaslechner.coroutineusecasesonandroid.mock.mockAndroidVersions
-import com.lukaslechner.coroutineusecasesonandroid.mock.mockVersionFeaturesAndroid10
+import com.lukaslechner.coroutineusecasesonandroid.mock.*
 import com.lukaslechner.coroutineusecasesonandroid.utils.MockNetworkInterceptor
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
@@ -15,22 +12,33 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Path
 
-fun mockApi(): RxMockApi =
-    createMockApi(
-        MockNetworkInterceptor()
-            .mock(
-                "http://localhost/recent-android-versions",
-                { Gson().toJson(mockAndroidVersions) },
-                200,
-                1500
-            )
-            .mock(
-                "http://localhost/android-version-features/29",
-                { Gson().toJson(mockVersionFeaturesAndroid10) },
-                200,
-                1500
-            )
-    )
+fun mockApi(): RxMockApi = createMockApi(
+    MockNetworkInterceptor()
+        .mock(
+            "http://localhost/recent-android-versions",
+            { Gson().toJson(mockAndroidVersions) },
+            200,
+            1000
+        )
+        .mock(
+            "http://localhost/android-version-features/27",
+            { Gson().toJson(mockVersionFeaturesOreo) },
+            200,
+            1000
+        )
+        .mock(
+            "http://localhost/android-version-features/28",
+            { Gson().toJson(mockVersionFeaturesPie) },
+            200,
+            1000
+        )
+        .mock(
+            "http://localhost/android-version-features/29",
+            { Gson().toJson(mockVersionFeaturesAndroid10) },
+            200,
+            1000
+        )
+)
 
 interface RxMockApi {
 
