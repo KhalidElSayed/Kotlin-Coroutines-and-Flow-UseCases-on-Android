@@ -11,18 +11,25 @@ class SequentialNetworkRequestsCallbacksViewModel(
     private val mockApi: CallbackMockApi = mockApi()
 ) : BaseViewModel<UiState>() {
 
-    private lateinit var recentAndroidVersions: Call<List<AndroidVersion>>
+    lateinit var recentAndroidVersions: Call<List<AndroidVersion>>
     lateinit var androidVersionFeatures: Call<VersionFeatures>
 
     fun perform2SequentialNetworkRequest() {
         uiState.value = UiState.Loading
         recentAndroidVersions = mockApi.getRecentAndroidVersions()
         recentAndroidVersions.enqueue(object : Callback<List<AndroidVersion>> {
-            override fun onResponse(call: Call<List<AndroidVersion>>, response: Response<List<AndroidVersion>>) {
+            override fun onResponse(
+                call: Call<List<AndroidVersion>>,
+                response: Response<List<AndroidVersion>>
+            ) {
                 if (response.isSuccessful) {
-                    androidVersionFeatures = mockApi.getAndroidVersionFeatures(response.body()!!.last().apiLevel)
+                    androidVersionFeatures =
+                        mockApi.getAndroidVersionFeatures(response.body()!!.last().apiLevel)
                     androidVersionFeatures.enqueue(object : Callback<VersionFeatures> {
-                        override fun onResponse(call: Call<VersionFeatures>, response: Response<VersionFeatures>) {
+                        override fun onResponse(
+                            call: Call<VersionFeatures>,
+                            response: Response<VersionFeatures>
+                        ) {
                             if (response.isSuccessful) {
                                 uiState.value = UiState.Success(response.body()!!)
                             } else {
@@ -48,7 +55,9 @@ class SequentialNetworkRequestsCallbacksViewModel(
 
     override fun onCleared() {
         super.onCleared()
-        recentAndroidVersions.cancel()
-        androidVersionFeatures.cancel()
+        if (this::recentAndroidVersions.isInitialized)
+            recentAndroidVersions.cancel()
+        if (this::androidVersionFeatures.isInitialized)
+            androidVersionFeatures.cancel()
     }
 }

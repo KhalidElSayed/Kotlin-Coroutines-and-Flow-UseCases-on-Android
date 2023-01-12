@@ -18,20 +18,15 @@ class ContinueCoroutineWhenUserLeavesScreenViewModel(
         viewModelScope.launch {
             val localVersions = repository.getLocalAndroidVersions()
             if (localVersions.isNotEmpty()) {
-                uiState.value =
-                    UiState.Success(DataSource.Database, localVersions)
+                uiState.value = UiState.Success(DataSource.Database, localVersions)
             } else {
-                uiState.value =
-                    UiState.Error(DataSource.Database, "Database empty!")
+                uiState.value = UiState.Error(DataSource.Database, "Database empty!")
             }
 
             uiState.value = UiState.Loading.LoadFromNetwork
 
             try {
-                uiState.value = UiState.Success(
-                    DataSource.Network,
-                    repository.loadAndStoreRemoteAndroidVersions()
-                )
+                uiState.value = UiState.Success(DataSource.Network, repository.loadAndStoreRemoteAndroidVersions())
             } catch (exception: Exception) {
                 uiState.value = UiState.Error(DataSource.Network, "Network Request failed")
             }
