@@ -40,7 +40,7 @@ class CalculationInBackgroundViewModel : BaseViewModel<UiState>() {
 
     private suspend fun calculatingFactorial(factorialOf: Int): BigInteger {
         // TODO: this code will lead to memory leak because the running operation here inside
-        //  the coroutine will keep running in sipte of
+        //  the coroutine will keep running in spite of
         return withContext(Dispatchers.Default) {
             var factorial = BigInteger.ONE
             for (i in 1..factorialOf) {
