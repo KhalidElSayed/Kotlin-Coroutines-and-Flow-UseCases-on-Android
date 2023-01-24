@@ -28,7 +28,7 @@ class StockAdapter: RecyclerView.Adapter<StockAdapter.ViewHolder>() {
         return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) = with(holder.binding){
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) = with(holder.binding) {
         val stock = stockList?.get(position) ?: return@with
         rank.text = stock.rank.toString()
         name.text = stock.name
